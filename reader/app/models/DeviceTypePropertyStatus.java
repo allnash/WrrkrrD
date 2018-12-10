@@ -1,0 +1,1 @@
+../../../../WrrkrrS/app/models/DeviceTypePropertyStatus.java

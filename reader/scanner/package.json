@@ -1,0 +1,26 @@
+{
+  "name": "wrrkrr-rpi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nash Gadre",
+  "license": " Copyright (C) OmegaTrace, Inc - All Rights Reserved. Unauthorized copying of this file and other files inside 'omegatrace-rpi' folder via any medium is strictly prohibited. Proprietary and confidential. Written by Nash Gadre <gadre@omegatrace.com>, June 2017",
+  "dependencies": {
+    "bleno": "^0.5.0",
+    "eddystone-url-encoding": "^1.0.0",
+    "forever": "^0.15.3",
+    "forever-monitor": "^1.7.1",
+    "getmac": "^1.4.1",
+    "log4js": "^1.1.1",
+    "noble": "^1.9.1",
+    "properties-reader": "0.0.15",
+    "uuid": "^3.3.2",
+    "xpc-connection": "sandeepmistry/node-xpc-connection#pull/26/head"
+  },
+  "resolutions": {
+    "xpc-connection": "sandeepmistry/node-xpc-connection#pull/26/head"
+  }
+}

@@ -1,0 +1,61 @@
+#!/bin/sh -e
+
+# OmegaTrace Inc. ("COMPANY") CONFIDENTIAL
+# Unpublished Copyright (c) 2017 OmegaTrace Inc., All Rights Reserved.
+#
+# NOTICE:  All information contained herein is, and remains the property of COMPANY. 
+# The intellectual and technical concepts contained herein are proprietary to COMPANY and may be covered by U.S. and 
+# Foreign Patents, patents in process, and are protected by trade secret or copyright law.
+# Dissemination of this information or reproduction of this material is strictly forbidden unless prior written 
+# permission is obtained from COMPANY. Access to the source code contained herein is hereby forbidden to anyone except
+# current COMPANY employees, managers or contractors who have executed Confidentiality and Non-disclosure agreements 
+# explicitly covering such access.
+#
+# The copyright notice above does not evidence any actual or intended publication or disclosure of this source code,
+# which includes information that is confidential and/or proprietary, and is a trade secret, of  COMPANY.   
+# ANY REPRODUCTION, MODIFICATION, DISTRIBUTION, PUBLIC  PERFORMANCE, OR PUBLIC DISPLAY OF OR THROUGH USE  OF THIS  
+# SOURCE CODE  WITHOUT  THE EXPRESS WRITTEN CONSENT OF COMPANY IS STRICTLY PROHIBITED, AND IN VIOLATION OF APPLICABLE 
+# LAWS AND INTERNATIONAL TREATIES.  THE RECEIPT OR POSSESSION OF  THIS SOURCE CODE AND/OR RELATED INFORMATION DOES NOT
+# CONVEY OR IMPLY ANY RIGHTS TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL 
+# ANYTHING THAT IT  MAY DESCRIBE, IN WHOLE OR IN PART.
+
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+sleep 10
+su pi -c 'sudo forever start /home/pi/wrrkrr-reader-0.1/scanner/index.js >> /home/pi/wrrkrr-ble.log &'
+
+# Disable because second adapter is removed
+# sleep 10
+# su pi -c 'sudo forever start /home/pi/wrrkrr-reader-0.1/scanner/scan.js >> /home/pi/omegatrace-scan.log &'
+
+# Setup WLAN1 to Monitor mode on startup
+echo "Setup WLAN1 to Monitor mode on startup"
+ifconfig wlan1 down
+iwconfig wlan1 mode monitor
+ifconfig wlan1 up
+
+# Start Channel hopping from 2.4Ghz (1-13) & 5Ghz (36-161)
+sleep 10
+echo "Start Channel hopping from 1-13 & 36-161"
+/bin/bash /home/pi/wrrkrr-reader-0.1/lookaroundyou/chanhop.sh -i wlp1s0 -b IEEE80211BINTL -b IEEE80211A -d .10 &
+
+# Start wrrkrr reader edge service
+sleep 10
+su pi -c 'cd /home/pi/wrrkrr-reader-0.1 && ./bin/wrrkrr-reader -J-Xms128M -J-Xmx256m 2> /dev/null &'
+
+exit 0

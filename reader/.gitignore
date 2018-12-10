@@ -1,0 +1,25 @@
+logs
+target
+build
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/.gradle
+*node_modules
+/RUNNING_PID
+project/target
+conf/application.conf
+conf/application.conf.production
+conf/application.conf.pi
+conf/logback.xml
+conf/logback.xml.pi
+conf/logback.xml.production
+
+
+# Development files
+*.class
+*.log
+*.iml
+*.DS_Store
