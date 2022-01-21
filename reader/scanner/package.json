@@ -14,7 +14,7 @@
     "forever": "^0.15.3",
     "forever-monitor": "^1.7.1",
     "getmac": "^1.4.1",
-    "log4js": "^1.1.1",
+    "log4js": "^6.4.0",
     "noble": "^1.9.1",
     "properties-reader": "0.0.15",
     "uuid": "^3.3.2",
