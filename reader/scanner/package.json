@@ -16,7 +16,7 @@
     "getmac": "^1.4.1",
     "log4js": "^1.1.1",
     "noble": "^1.9.1",
-    "properties-reader": "0.0.15",
+    "properties-reader": "2.2.0",
     "uuid": "^3.3.2",
     "xpc-connection": "sandeepmistry/node-xpc-connection#pull/26/head"
   },
